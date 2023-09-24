@@ -58,6 +58,7 @@ print('===============reduce========')
 print(reduce(lambda x, y: x + y, nums))
 
 """
+Useful packages: 
 Web automation:
     BeautifulSoap4
     request
