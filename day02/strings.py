@@ -13,11 +13,11 @@ print(s2)
 print(s3)
 
 s4 = s[::-1]  # reverses the string after slicing
-print(s4)
+print("s4:", s4)
 
 s = 'Python Programming'
 s5 = reversed(s)  # s5 no longer string
-print(s5)
+print("s5:", s5)
 print(type(s5))
 
 s6 = s[7:]
