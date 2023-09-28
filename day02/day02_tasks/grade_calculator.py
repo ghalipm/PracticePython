@@ -10,16 +10,24 @@
                     60 ~ 69 ==> D
                     0 ~ 59 ==> F
 
-    8.3 Ask the user would you like to continue
+    8.3 Ask the user would you like to continue (when?: If user enters an invalid entry)
             If "yes" --> repeat the previous steps
             If "no" --> print "Thank you for using Grade Calculator APP"
 
             If user enters an invalid entry, ask the user to re-enter until user provides a valid entry
 """
+import numbers
+
 # 8.1:
+
 # option 1:
-scores = int(input("Enter your score:"))
-print(" " if 0 <= scores <= 100 else "Invalid Entry")
+
+p_score = int(input("Enter your percentage score: "))
+
+
+def is_valid_grade(num: numbers):
+    return True if 0 <= num <= 100 else False
+
 
 # option 2:
 
@@ -31,89 +39,69 @@ print(" " if 0 <= scores <= 100 else "Invalid Entry")
 
 # 8.2:
 
-try:
-    score = int(input("Enter your score: "))
-except ValueError:
-    print("Invalid Entry")
-    exit()
-if 90 <= score <= 100:
-    grade = 'A'
-elif 80 <= score <= 89:
-    grade = 'B'
-elif 70 <= score <= 79:
-    grade = 'C'
-elif 60 <= score <= 69:
-    grade = 'D'
-elif 0 <= score <= 59:
-    grade = 'F'
-else:
-    print("Invalid Entry")
-    exit()
+def grader(pscore: numbers):
+    if is_valid_grade(pscore):
+        if 90 <= pscore <= 100:
+            return 'A'
+        elif 80 <= pscore <= 89:
+            return 'B'
+        elif 70 <= pscore <= 79:
+            return 'C'
+        elif 60 <= pscore <= 69:
+            return 'D'
+        elif 0 <= pscore <= 59:
+            return 'F'
+    else:
+        return "Invalid Entry"
 
-print(f"Your grade is: {grade}")
+
+# print(f"Your grade is: {grader(scores)}")
 
 #  8.3 :
-message2 = input(" Would you like to continue?")
-if message2 == "yes":
-    score = int(input("Enter your score: "))
-    if 0 <= scores <= 100:
-        if scores >= 90:
-            grade = 'A'
-        elif scores >= 80:
-            grade = 'B'
-        elif scores >= 70:
-            grade = 'C'
-        elif scores >= 60:
-            grade = 'D'
-        else:
-            grade = 'F'
-    else:
-        grade = None
-    print(f"Your letter grade: {grade}" if 0 <= scores <= 100 else "Invalid Entry")
-elif message2 == "no":
-    print("Thank you for using Grade Calculator APP")
-else:
-    score = int(input("Enter your score:"))
-    if 0 <= scores <= 100:
-        if scores >= 90:
-            grade = 'A'
-        elif scores >= 80:
-            grade = 'B'
-        elif scores >= 70:
-            grade = 'C'
-        elif scores >= 60:
-            grade = 'D'
-        else:
-            grade = 'F'
-    else:
-        grade = None
-    print(f"Your letter grade: {grade}" if 0 <= scores <= 100 else "Invalid Entry")
 
-# option 2:
-# while True:
-#     try:
-#         score = int(input("Enter your score: "))
-#     except ValueError:
-#         print("Invalid Entry")
-#         continue  # Ask the user to re-enter the score
-#
-#     if 90 <= score <= 100:
-#         grade = 'A'
-#     elif 80 <= score <= 89:
-#         grade = 'B'
-#     elif 70 <= score <= 79:
-#         grade = 'C'
-#     elif 60 <= score <= 69:
-#         grade = 'D'
-#     elif 0 <= score <= 59:
-#         grade = 'F'
-#     else:
-#         print("Invalid Entry")
-#         continue  # Ask the user to re-enter the score
-#
-#     print(f"Your grade is: {grade}")
-#
-#     choice = input("Would you like to continue (yes/no)? ").lower()
-#     if choice != "yes":
-#         print("Thank you for using Grade Calculator APP")
-#         break  # Exit the loop if the user enters anything other than "yes"
+def question_invalid_entry(pscore: numbers):
+    if is_valid_grade(pscore):
+        print(f"Your letter grade: {grader(pscore)}")
+        exit()
+    else:
+        print("Invalid Entry!")
+        message = input(" Would you like to continue?")
+
+        while message.lower() == "yes":
+            new_score = int(input("Enter your score: "))
+            if is_valid_grade(new_score):
+                print(f"Valid Entry!{new_score}")
+                print(f"Your letter grade: {grader(new_score)}")
+                exit()
+            else:
+                print("Invalid Entry!")
+                message = input(" Would you like to continue?")
+
+        if message.lower() == "no":
+            print("Thank you for using Grade Calculator APP")
+            exit()
+
+        while message.lower() not in {"yes", "no"}:
+            print("Invalid Entry!")
+            message = input(" Would you like to continue?")
+
+            if message.lower() == "no":
+                print("Thank you for using Grade Calculator APP")
+                exit()
+
+            elif message.lower() == "yes":
+                new_score = int(input("Enter your score: "))
+                if is_valid_grade(new_score):
+                    print(f"Valid Entry : {new_score}")
+                    print(f"Your letter grade: {grader(new_score)}")
+                    exit()
+                else:
+                    print("Invalid Entry!")
+                    message = input(" Would you like to continue?")
+
+            else:
+                print("Invalid Entry!")
+                message = input(" Would you like to continue?")
+
+
+print(question_invalid_entry(p_score))
