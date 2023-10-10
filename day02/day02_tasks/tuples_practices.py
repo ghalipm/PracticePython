@@ -27,7 +27,6 @@
                     Output:
                         There are 3 even numbers and 4 odd numbers
 """
-from typing import re
 
 words = ('Java', 'Anna', 'python', 'Cydeo', 'Level')
 
