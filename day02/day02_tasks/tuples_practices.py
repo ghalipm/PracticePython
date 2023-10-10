@@ -27,6 +27,7 @@
                     Output:
                         There are 3 even numbers and 4 odd numbers
 """
+from typing import re
 
 words = ('Java', 'Anna', 'python', 'Cydeo', 'Level')
 
@@ -49,6 +50,38 @@ for num in tuple1:
     else:
         continue
 
+# python-remove-character-from-string
+# https://builtin.com/software-engineering-perspectives/python-remove-character-from-string?i=450b0b0e-3adf-4a18-a45b-48af19281d8b&utm_source=transactional&utm_medium=email&utm_campaign=Built-In-Email
+
+str1 = 'Anna4$'.lower()
+s1 = "".join(c for c in str1 if c.isalpha())
+print(s1)
+s2 = "".join(reversed(s1))
+print("Palindrome: ", s1 == s2)
+
+
+s="Hello$ Python3$"
+s1=s.replace("$","")
+print ("Replacing/removing characters:",s1)
+
+
+s = "Hello$@ Python3&_"
+import re
+
+s1 = re.sub("[^A-Za-z0-9]", "", s)  # replace everything other than A-Z, a-z , 0-9 with empty string in string s.
+print(s1)
+
+s = "Hello347 Python3$"
+import re
+
+s1 = re.sub("[0-9]", "", s)  # replace 0-9 with empty string in string s.
+print(s1)
+
+s = "Hello$@ Python3&"
+f = filter(str.isalpha, s)
+s1 = "".join(f)
+print("Filtering alpha:", s1)
+
 # 10.3:
 even_count = 0
 odd_count = 0
@@ -60,4 +93,3 @@ for num in nums:
         odd_count += 1
 
 print(f"There are {even_count} even numbers and {odd_count} odd numbers")
-
